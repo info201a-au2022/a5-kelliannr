@@ -1,8 +1,10 @@
 # UI code
 
+library(tidyverse)
 library(shiny)
-library(ggplot2)
 library(plotly)
+library(ggplot2)
+
 co2_data <- read_csv("https://raw.githubusercontent.com/owid/co2-data/master/owid-co2-data.csv")
 
 intro_panel <- tabPanel(

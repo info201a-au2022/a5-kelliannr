@@ -1,8 +1,10 @@
 # Server code
 
+library(tidyverse)
 library(shiny)
-library(ggplot2)
 library(plotly)
+library(ggplot2)
+
 co2_data <- read_csv("https://raw.githubusercontent.com/owid/co2-data/master/owid-co2-data.csv")
 
 # Define server logic required
@@ -13,7 +15,7 @@ server <- function(input, output) {
                            select(year, population, co2) %>% 
                            filter(!is.na(population) & !is.na(co2) & !is.na(year))
     
-    plot_population_co2 <- population_co2_data %>% 
+  plot_population_co2 <- population_co2_data %>% 
                            ggplot(aes(x = population, y = co2, color = year)) + 
                            geom_point() +
                            labs(x = "Population",
@@ -35,7 +37,7 @@ server <- function(input, output) {
     cor_eff <- cor(population_co2$population, population_co2$co2, use = "complete.obs")
     total <- paste0("In the graph above, we can see that there is a pretty strong relationship between
                      CO2 emission and population. This makes sense because the correlation coefficient
-                     betweenthe two variables is ",
+                     between the two variables is ",
                     round(cor_eff, digits = 2),
                     ", indicating a strong positive correlation."
                    )
